@@ -1,11 +1,7 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import { useEffect, useState } from "react";
 import PokemonCard from "../pages/pokemonCard";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [pokemon, setPokemon] = useState([]);
@@ -13,7 +9,7 @@ export default function Home() {
   const [filteredPokemon, setFilteredPokemon] = useState([]);
 
   const fetchData = () => {
-    fetch(`https://pokeapi.co/api/v2/pokemon?limit=2000`)
+    fetch(`https://pokeapi.co/api/v2/pokemon?limit=493`)
       .then((res) => res.json())
       .then((data) => {
         setPokemon(data.results);
@@ -22,22 +18,21 @@ export default function Home() {
   };
 
   useEffect(fetchData, []);
-  console.log(pokemon[1]);
 
   const handleChange = (e) => {
     setTextInput(e.target.value);
   };
 
-  // useEffect(() => {
-  //   if (textInput) {
-  //     // const filtered = filteredPokemon.filter((_pokemon) => {
-  //     //   // return pokemon.strMeal.toLowerCase().includes(textInput.toLowerCase());
-  //     // });
-  //   //   setFilteredPokemon(filtered);
-  //   // } else {
-  //   //   setFilteredPokemon(pokemon);
-  //   // }
-  // }, [textInput]);
+  useEffect(() => {
+    if (textInput) {
+      const filtered = filteredPokemon.filter((_pokemon) => {
+        return _pokemon.name.toLowerCase().includes(textInput.toLowerCase());
+      });
+      setFilteredPokemon(filtered);
+    } else {
+      setFilteredPokemon(pokemon);
+    }
+  }, [textInput]);
 
   return (
     <>
@@ -47,16 +42,24 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <h1>HEJ</h1>
 
-        <div className="searchBar">
-          <input
-            type="text"
-            placeholder="Search Pokemon"
-            onChange={handleChange}
-          />
-        </div>
+      <div className="searchBar">
+        <input
+          type="text"
+          placeholder="Search Pokemon"
+          onChange={handleChange}
+        />
+      </div>
+      <main className="wrapper">
+        {/* <PokemonCard name={pokemon[1].name} url={pokemon[1].url} /> */}
+        {filteredPokemon.length &&
+          filteredPokemon.map((_pokemon, index) => {
+            return (
+              <PokemonCard key={index} name={_pokemon.name} url={_pokemon.url}>
+                {_pokemon.name}
+              </PokemonCard>
+            );
+          })}
       </main>
     </>
   );

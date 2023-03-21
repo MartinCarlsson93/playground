@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+body {
+  background-color: lightgrey;
+}
+
+.searchBar {
+  padding-left: 5rem;
+  margin-top: 1rem;
+}
+
+input {
+  padding: 0.5rem 2rem;
+  border-radius: 5px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 5rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background: dimgray;
+  color: white;
+  margin-bottom: 2rem;
+  height: 130px;
+}
+
+.pages img {
+  width: 300px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin-top: 1rem;
+}
+
+.pages {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  line-height: 1.8rem;
+}
+
+.instructions {
+  border: 1px solid darkgray;
+  margin-top: 1rem;
+  padding: 1rem;
+  max-width: 450px;
+  height: auto;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: white;
+}
+
+.footerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: x-small;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 5rem;
+  box-shadow: 0 1px 8px #ddd;
+  background: darkgrey;
+  margin-top: 2rem;
+}
+
+.links a {
+  color: white;
+}
