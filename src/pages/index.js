@@ -1,19 +1,19 @@
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
 import { useEffect, useState } from "react";
-import PokemonCard from "../pages/pokemonCard";
+import SpaceCard from "./SpaceCard";
 
 export default function Home() {
-  const [pokemon, setPokemon] = useState([]);
+  const [launches, setLaunches] = useState([]);
   const [textInput, setTextInput] = useState("");
-  const [filteredPokemon, setFilteredPokemon] = useState([]);
+  const [filteredLaunches, setFilteredLaunches] = useState([]);
 
   const fetchData = () => {
-    fetch(`https://pokeapi.co/api/v2/pokemon?limit=493`)
+    fetch(`https://api.spacexdata.com/v5/launches/`)
       .then((res) => res.json())
       .then((data) => {
-        setPokemon(data.results);
-        setFilteredPokemon(data.results);
+        console.log(data);
+        setLaunches(data);
+        setFilteredLaunches(data);
       });
   };
 
@@ -25,12 +25,12 @@ export default function Home() {
 
   useEffect(() => {
     if (textInput) {
-      const filtered = filteredPokemon.filter((_pokemon) => {
-        return _pokemon.name.toLowerCase().includes(textInput.toLowerCase());
+      const filtered = filteredLaunches.filter((_launches) => {
+        return _launches.name.toLowerCase().includes(textInput.toLowerCase());
       });
-      setFilteredPokemon(filtered);
+      setFilteredLaunches(filtered);
     } else {
-      setFilteredPokemon(pokemon);
+      setFilteredLaunches(launches);
     }
   }, [textInput]);
 
@@ -46,18 +46,22 @@ export default function Home() {
       <div className="searchBar">
         <input
           type="text"
-          placeholder="Search Pokemon"
+          placeholder="Search Launches"
           onChange={handleChange}
         />
       </div>
       <main className="wrapper">
-        {/* <PokemonCard name={pokemon[1].name} url={pokemon[1].url} /> */}
-        {filteredPokemon.length &&
-          filteredPokemon.map((_pokemon, index) => {
+        {filteredLaunches.length &&
+          filteredLaunches.map((_launches, index) => {
             return (
-              <PokemonCard key={index} name={_pokemon.name} url={_pokemon.url}>
-                {_pokemon.name}
-              </PokemonCard>
+              <SpaceCard
+                key={index}
+                name={_launches.name}
+                source={_launches.links.patch.small}
+                date={_launches.date_local}
+                detail={_launches.details}
+                id={_launches.flight_number}
+              />
             );
           })}
       </main>

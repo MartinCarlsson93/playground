@@ -1,9 +1,9 @@
-.box {
+.card {
   display: flex;
   flex-wrap: wrap;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 2px solid rgba(0, 0, 0, 0.39);
-  width: 150px;
+  width: 300px;
   height: 350px;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -12,20 +12,30 @@
   margin-top: 1rem;
 }
 
-.box:hover {
+.card:hover {
   transform: scale(1.1);
 }
 
-.box img {
+.card img {
   border-radius: 5px;
   width: 100%;
+  max-width: 250px;
 }
-.box h1 {
+.card h1 {
   margin: 0;
 }
+
+.card-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .header {
   text-align: center;
-  font-size: 80px;
+  font-size: 50px;
 }
 
 a {
